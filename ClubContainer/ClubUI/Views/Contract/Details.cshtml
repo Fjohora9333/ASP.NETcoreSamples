@@ -1,0 +1,54 @@
+﻿@model ClubUI.Models.Contract
+
+@{
+    ViewData["Title"] = "Details Contract for "+ ViewBag.ClubName;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Contract</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PricePerPerformace)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PricePerPerformace)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfPerformances)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfPerformances)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Club)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Club.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Group)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Group.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ContractId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

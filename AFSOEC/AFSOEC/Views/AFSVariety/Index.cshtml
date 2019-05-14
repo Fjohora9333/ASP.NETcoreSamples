@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AFSOEC.Models.Variety>
+
+@{
+    ViewData["Title"] = "Variety for " + ViewBag.Name;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderBy(v=>v.Name)) {
+        <tr>
+            <td>
+                <a asp-controller="AFSPlot" asp-action="Index" asp-route-VarietyId="@item.VarietyId" asp-route-VarietyName="@item.Name"> @Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VarietyId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VarietyId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VarietyId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

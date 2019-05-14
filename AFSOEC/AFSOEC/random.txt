@@ -1,0 +1,3 @@
+﻿Data Source=DESKTOP-LT88502\FATIMASQL2017;Initial Catalog=OEC;Integrated Security=True;
+
+Scaffold-DbContext –Connection "Server=DESKTOP-LT88502\FATIMASQL2017;Database=OEC;Trusted_Connection=True;" -Provider "Microsoft.EntityFrameworkCore.SqlServer" -OutputDir "Models" –Context "OECContext" –Verbose    -Force

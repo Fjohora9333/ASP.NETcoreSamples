@@ -1,0 +1,78 @@
+﻿@model IEnumerable<AFSOEC.Models.Plot>
+@using Microsoft.AspNetCore.Http
+
+
+@{
+    var heading = "Plot listing";
+    if (Context.Session.GetString("criteria") == "crop")
+    {
+        heading += $" for crop: {Context.Session.GetString("CropName")}";
+    }
+    else if (Context.Session.GetString("criteria") == "variety")
+    {
+        heading += $" for variety: {Context.Session.GetString("VarietyName")}";
+    }
+    ViewData["Title"] = heading;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sortby="farm">Farm @Html.DisplayNameFor(model => model.Farm.Name)</a>
+            </th>
+            <th>
+                Crop @Html.DisplayNameFor(model => model.Variety.Crop.Name)
+            </th>
+            <th>
+                <a asp-route-sortby="variety">Variety @Html.DisplayNameFor(model => model.Variety.Name)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePlanted)
+            </th>
+            <th>
+                <a asp-route-sortby="cec">@Html.DisplayNameFor(model => model.Cec)</a>
+            </th>
+
+            <th>@Html.DisplayNameFor(model => model.Treatment)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farm.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Variety.Crop.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Variety.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePlanted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cec)
+            </td>
+            <td>
+                @foreach (var treatment in item.Treatment.Select(t => t.Name))
+                {@treatment<br />}
+            </td>
+            <td>
+                <a asp-controller="AFSTreatment" asp-action="Index" asp-route-PlotId="@item.PlotId" asp-route-FarmId="@item.FarmId">Manage Treatments</a> |
+                <a asp-action="Edit" asp-route-id="@item.PlotId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PlotId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PlotId">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
